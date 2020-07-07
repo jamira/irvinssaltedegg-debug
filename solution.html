@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution</title>
+</head>
+<body>
+  <script type="text/javascript">
+    window.onload = function() {
+      // 1.) I want this code to log out "hey amy", but it logs out "hey arnold" - why?
+        function greet(person) {
+          if (person == { name: 'amy' }) {
+            return 'hey amy'
+          } else {
+            return 'hey arnold'
+          }
+        }
+        greet({ name: 'amy' })
+      
+    // solution
+    // we can't just simply evalute the object inside our condition statement. 
+    // It should be access through object name then property and do the evaluation. Like solution below
+      function greet(person) {
+        let obj = {
+            name: 'amy'
+        }
+        if (person === obj.name) {
+            console.log('hey amy')
+        } else {
+            console.log('hey arnold')
+        }
+      }
+      greet('amy')
+
+      // 2.) I want this code to log out the numbers 0, 1, 2, 3 in that order, but it doesn’t do what I expect. Why?
+      for (var i = 0; i < 4; i++) {
+        setTimeout(() => console.log(i), 0)
+      }
+
+      // solution
+      // each time we cycle through the variable i, the increament value is being added. Because var is global and can be assigned/redeclared
+      // unlike let can't be redecalred
+      for (let i = 0; i < 4; i++) {
+        setTimeout(() => console.log(i), 0)
+      }
+
+      // 3.) I want this code to log out "doggo", but it logs out undefined!
+      let dog = {
+        name: 'doggo',
+        sayName() {
+          console.log(this.name)
+        }
+      }
+
+      let sayName = dog.sayName
+      sayName()
+
+      // 4.) I want my dog to bark(), but instead I get an error. Why?
+      function Dog(name) {
+        this.name = name
+      }
+
+      Dog.bark = function() {
+        console.log(this.name + ' says woof')
+      }
+
+      let fido = new Dog('fido')
+      fido.bark()
+
+      // solution
+      function Dog(name) {
+        this.name = name
+      }
+
+      Dog.prototype.bark = function() {
+        console.log(this.name + ' says woof')
+      }
+
+      let fido = new Dog('fido')
+      fido.bark()
+
+      // 5.) Why does this code return the results that it does?
+      function isBig(thing) {
+        if (thing == 0 || thing == 1 || thing == 2) {
+          console.log(`${thing} false`)
+          return false
+        }
+        
+        console.log(`${thing} true`)
+        return true
+      }
+
+      isBig(1)    // false
+      isBig([2])  // false
+      isBig([3])  // true
+
+    // explaination  
+    // the first method refers to evaluation checking since the condtion is explicitly match to the integer it
+    // the second method refers to array element. Since we explicitly acces an array by reffering to its index number below
+
+    }
+  </script>
+</body>
+</html>
